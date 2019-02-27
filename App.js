@@ -16,10 +16,12 @@ const config = {
 export default class App extends React.Component {
   constructor(props){
     super(props)
+
     this.state = {
-      message: "",
+      message: '',
       messages: []
     }
+
     this.addItem = this.addItem.bind(this);
   }
 
@@ -31,7 +33,7 @@ export default class App extends React.Component {
       .once("value", snapshot => {
         const data = snapshot.val()
         if(snapshot.val()){
-          const initMessages = []
+          const initMessages = [];
           Object
             .keys(data)
             .forEach(message => initMessages.push(data[message]));
@@ -46,8 +48,8 @@ export default class App extends React.Component {
         .ref()
         .child("messages")
         .on("child_added", snapshot => {
-          const data = snapshot.val()
-          if(snapshot.val()){
+          const data = snapshot.val();
+          if(data){
             this.setState(prevState => ({
               messages: [data, ...prevState.messages]
             }))
@@ -63,7 +65,7 @@ export default class App extends React.Component {
     const newMessage = firebase.database().ref()
                                           .child("messages")
                                           .push();
-    newMessage.set(this.state.message, () => this.setState({message: ""}))
+    newMessage.set(this.state.message, () => this.setState({message: ''}))
   }
   render() {
     return (
@@ -75,13 +77,16 @@ export default class App extends React.Component {
             style={styles.txtInput}/>
           <Button title="Send" onPress ={this.addItem}/>
         </View>
+
+
         <FlatList data ={this.state.messages}
           renderItem = {
             ({item}) =>
-          <View style={styles.listItemContainer}>
-            <Text style ={styles.listItem}>
-            </Text>
-          </View>
+            <View style={styles.listItemContainer}>
+              <Text style ={styles.listItem}>
+                {item}
+              </Text>
+            </View>
         }
         />
       </View>
