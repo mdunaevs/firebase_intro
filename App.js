@@ -1,4 +1,4 @@
-# Video link to how to create message board: https://www.youtube.com/watch?v=Di607bTqhPc
+// Video link to how to create message board: https://www.youtube.com/watch?v=Di607bTqhPc
 
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, FlatList} from 'react-native';
